@@ -67,7 +67,7 @@ async Task RunWriteAndRead(ApplicationDbContext context)
     }
 
     // Начало транзакции
-    //using var tx = DbTools.TransactionScopeAsyncCreate();
+    using var tx = DbTools.TransactionScopeAsyncCreate();
     //await using (var transaction = await context.Database.BeginTransactionAsync(
     //isolationLevel: System.Data.IsolationLevel.ReadCommitted,
     //cancellationToken: cancellationToken))
@@ -129,7 +129,7 @@ async Task RunWriteAndRead(ApplicationDbContext context)
    // {
   //      Console.WriteLine($"ID: {contractor.Id}, Название: {contractor.Name}, ИНН: {contractor.Inn}, L: {contractor.L}, Created: {contractor.Created}, Deleted: {contractor.Deleted}, LongData: {contractor.LongData}");
    // }
-    //tx.Complete();
+    tx.Complete();
     NpgsqlConnection.ClearAllPools();
 
     async Task RunReadOnly(ApplicationDbContext context)
